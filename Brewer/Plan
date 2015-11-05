@@ -1,0 +1,15 @@
+GUI
+	-Names
+	
+	
+Interface
+	-Formula for carbonation level using Corn sugar 
+	-Formula for carbonation level using table sugar
+	
+Database
+	-Used to store ingredients values for preset beers
+		(Tables = Beer type, Row = ingredient, Column - amount)
+	
+		
+	
+	
