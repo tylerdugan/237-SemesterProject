@@ -1,6 +1,11 @@
+http://www.brewtoad.com
+
+StringTokenizer somewhere
+
 GUI
 	-Names
-	
+	-Drop down menus for pre-set recipes
+		-Text field(s) for custom brews
 	
 Interface
 	-Formula for carbonation level using Corn sugar 
@@ -9,6 +14,27 @@ Interface
 Database
 	-Used to store ingredients values for preset beers
 		(Tables = Beer type, Row = ingredient, Column - amount)
+		
+Req #5 & #6 - Super class with 2 sub-class
+	- Super Class
+		'Reinheitsgebot' - German Purity Laws
+		Ingredients: Grains, yeast, hops
+		
+	-Sub-classes
+		Special ingredients (Fruit, spices, herb, vegetables, etc...)
+		
+Req #10 - Polymorphism
+	- Cast 'Pure' beer to sub-class beer
+		(i.e. adding a fruit, herb, spice, etc. to a pre-set recipe)
+		
+Req #11. - Catch & Handle an exception
+	- Catch and handle a NumFormatException if user inputs 
+		invalid parameters 
+		
+Req #12. - Custom Exception
+	- If C02 level is too high, throw 'Bottle Bomb' Exception
+	
+	
 	
 		
 	
