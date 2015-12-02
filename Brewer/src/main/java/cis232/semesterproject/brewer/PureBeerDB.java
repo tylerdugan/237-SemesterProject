@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class PopulateBeerDB {
+public class PureBeerDB {
 
 	public static void main(String[] args) {
 		Connection conn = null;
@@ -23,15 +23,15 @@ public class PopulateBeerDB {
 		
 		//Drops table if already exists
 		try{
-			String dropTable = "drop Table Beers";
+			String dropTable = "drop Table PureBeers";
 			stmt.execute(dropTable);
-			System.out.println("Beers table dropped");
+			System.out.println("Pure Beers table dropped");
 		}catch(SQLException e){
-			System.out.println("Beers table doesn't exist");
+			System.out.println("Pure Beers table doesn't exist");
 		}
 		
 		//Create table string
-		String createBeersTable = "create table Beers(" +
+		String createBeersTable = "create table PureBeers(" +
 							"id int not null primary key, " + 
 							"name varchar(100), " +
 							"grains varchar(50), " +
@@ -42,19 +42,23 @@ public class PopulateBeerDB {
 		//Execute table creation
 		try{
 			stmt.execute(createBeersTable);
-			System.out.println("Beers table created.");
+			System.out.println("Pure Beers table created.");
 		} catch(SQLException e){
 			System.out.printf("Error creating Beers table: %s", e.getMessage());
 		}
 		
 		/**
-		 * Add Initial Beers Here
+		 * Pure Beers
 		 */
 		addBeer(conn, 01, "Saison", "6-row", "Wyeast1056", "Fuggle");
 		addBeer(conn, 02, "Porter", "2-row", "US-05", "Saaz");
 		addBeer(conn, 03, "PaleAle", "Pilsen", "WLP566", "Cascade");
 		addBeer(conn, 04, "BarleyWine", "Crystal", "Wyeast1084", "Columbus");
 		addBeer(conn, 05, "Stout", "Wheat", "Wyeast1764", "Calypso");
+		
+		/**
+		 * Craft Beers
+		 */
 	}
 	
 	public static void addBeer(Connection conn, int id, String name, String grains, String yeast, String hops){
@@ -62,7 +66,7 @@ public class PopulateBeerDB {
 		try{
 			stmt = conn.createStatement();
 			
-			String insertBeer = String.format("Insert Into Beers (id, name, grains, yeast, hops)" +
+			String insertBeer = String.format("Insert Into PureBeers (id, name, grains, yeast, hops)" +
 												" values(%d, '%s', '%s', '%s', '%s')",
 												 id, name, grains, yeast, hops);
 			stmt.execute(insertBeer);
