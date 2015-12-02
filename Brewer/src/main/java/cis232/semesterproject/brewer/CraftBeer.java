@@ -1,11 +1,17 @@
 package cis232.semesterproject.brewer;
 
 public class CraftBeer {
-	int id;
-	String name;
-	String grains;
-	String yeast;
-	String hops;
+	/**
+	 * Craft beers have 3 main ingredients and any number
+	 * of special ingredients, retrieved from GUI text field.
+	 */
+	
+	int id;			//Beer ID
+	String name;	//Beer Name
+	String grains;	//Grain Name
+	String yeast;	//Yeast Name
+	String hops;	//Hops Name
+	String special; //Special ingredient names/amounts are store in one long string
 	
 	public int getId() {
 		return id;
@@ -36,5 +42,11 @@ public class CraftBeer {
 	}
 	public void setHops(String hops) {
 		this.hops = hops;
+	}
+	public void setSpecial(String special){
+		this.special = special;
+	}
+	public String getSpecial(){
+		return special;
 	}
 }

@@ -1,11 +1,15 @@
 package cis232.semesterproject.brewer;
 
 public class PureBeer {
-	int id;
-	String name;
-	String grains;
-	String yeast;
-	String hops;
+	/**
+	 * Pure Beer only has 3 main ingredients
+	 */
+	
+	int id;			//Beer ID
+	String name;	//Beer Name
+	String grains;	//Grain Name
+	String yeast;	//Yeast Name
+	String hops;	//Hops Name
 	
 	public int getId() {
 		return id;

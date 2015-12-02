@@ -48,7 +48,7 @@ public class PureBeerDB {
 		}
 		
 		/**
-		 * Pure Beers
+		 * Add Pure Beers Below
 		 */
 		addBeer(conn, 01, "Saison", "6-row", "Wyeast1056", "Fuggle");
 		addBeer(conn, 02, "Porter", "2-row", "US-05", "Saaz");

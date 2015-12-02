@@ -34,8 +34,7 @@ public class CraftBeerDB {
 			String createBeersTable = "create table CraftBeers(" +
 								"beerid int" +
 								"id int not null primary key, " + 
-								"name varchar(100), " +
-								"amount int" + 
+								"special varchar(500) " +
 								")";
 			
 			//Execute table creation
@@ -48,20 +47,18 @@ public class CraftBeerDB {
 			
 			
 			/**
-			 * Craft Beers
+			 * Add Craft Beers Below
 			 */
 		}
 		
-		public static void addBeer(Connection conn, int beerid, int id, String name, int amount){
+		public static void addBeer(Connection conn, int beerid, int id, String special){
 			Statement stmt = null;
 			try{
 				stmt = conn.createStatement();
 				
-				String insertBeer = String.format("Insert Into PureBeers (beerid, id, name, amount)" +
-													" values(%d, %d, '%s', %d)",
-													 beerid, id, name, amount);
+				String insertBeer = String.format("Insert Into PureBeers (beerid, id, special)" +
+													" values(%d, %d, '%s')", beerid, id, special);
 				stmt.execute(insertBeer);
-				System.out.printf("%s added %n", name);
 			}catch(SQLException | NumberFormatException e){
 				System.out.printf("Error adding beer: %s", e.getMessage());
 			}
