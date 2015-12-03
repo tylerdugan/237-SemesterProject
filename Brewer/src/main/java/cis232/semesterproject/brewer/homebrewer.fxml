@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="502.0" prefWidth="710.0" style="-fx-background-color: aquamarine;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cis232.semesterproject.brewer.BrewerGUIController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="560.0">
+         <image>
+            <Image url="@Hop.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="150.0">
+         <image>
+            <Image url="@Hop2.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="186.0" layoutY="22.0" text="Homebrewer's Friend" underline="true">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <TabPane layoutY="150.0" prefHeight="353.0" prefWidth="710.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Priming Calculator">
+               <content>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="325.0" prefWidth="711.0" style="-fx-background-color: F1A705;">
+                     <children>
+                        <Label layoutX="76.0" layoutY="1.0" text="Style">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="ChoiceBoxStyle" layoutX="21.0" layoutY="28.0" prefWidth="150.0" />
+                        <Label layoutX="219.0" layoutY="1.0" text="Gallons of Beer">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="TextBoxGallons" layoutX="242.0" layoutY="28.0" prefHeight="25.0" prefWidth="75.0" />
+                        <Label layoutX="383.0" layoutY="1.0" text="Sugar (g/l)">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="TextBoxSugar" layoutX="383.0" layoutY="28.0" prefHeight="25.0" prefWidth="84.0" />
+                        <Label layoutX="528.0" layoutY="1.0" text="Volumes of Co2">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="TextBoxCo2" layoutX="517.0" layoutY="28.0" />
+                        <Button fx:id="ButtonSubmit" layoutX="331.0" layoutY="102.0" mnemonicParsing="false" text="Check" />
+                        <Label fx:id="LabelWarn" layoutX="170.0" layoutY="152.0" text="Caution! This bottle may explode!" textFill="RED">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="94.0" text="Target Co2 for style">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="TextBoxTarget" editable="false" layoutX="36.0" layoutY="115.0" prefHeight="25.0" prefWidth="78.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab text="Recipe Book">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: F1A705;">
+                     <children>
+                        <Label layoutX="51.0" layoutY="11.0" text="Name">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="217.0" layoutY="11.0" text="Grains">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="379.0" layoutY="11.0" text="Hops">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="545.0" layoutY="11.0" text="Yeast">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="502.0" layoutY="120.0" text="Special Ingredients" underline="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="ComboBoxName" layoutY="38.0" prefWidth="150.0" />
+                        <ComboBox fx:id="ComboBoxGrains" layoutX="167.0" layoutY="38.0" prefWidth="150.0" />
+                        <ComboBox fx:id="ComboBoxHops" layoutX="325.0" layoutY="38.0" prefWidth="150.0" />
+                        <ComboBox fx:id="ComboBoxYeast" layoutX="491.0" layoutY="38.0" prefWidth="150.0" />
+                        <TextArea fx:id="TextAreaSpecial" layoutX="480.0" layoutY="147.0" prefHeight="163.0" prefWidth="173.0" promptText="(example) &#10;Coffee - 10oz &#10;Crystal Malt - 1Lb            &#10;Bitter Orange Peel - 4oz" wrapText="true" />
+                        <Button fx:id="ButtonRein" layoutX="97.0" layoutY="150.0" mnemonicParsing="false" text="Is Reinheitsgebot?" />
+                        <Label fx:id="LabelReinYes" layoutX="37.0" layoutY="199.0" text="This is Reinhetsgebot!" textFill="#36942b" underline="true">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="LabelReinNo" layoutX="37.0" layoutY="253.0" text="This is not Reinhetsgebot!" textFill="RED" underline="true">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="About Reinheitsgebot ">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: F1A705;">
+                     <children>
+                        <TextArea editable="false" layoutX="199.0" layoutY="36.0" prefHeight="267.0" prefWidth="313.0" text="The Reinheitsgebot is a regulation about the purity of beer. The regulation started in Ingolstadt, in Bavaria, in Germany, in 1516. It says what can be part of beer, and what can not. &#10;&#10;Even today the most important law, &quot;The Reinheitsgebot&quot;, is still the most important law affecting brewing in Germany. In the beer tax law, which regulates beer production, it states: &quot;For the preparation of beer, only malt, hops, yeast and water can be used.&quot;&#10;&#10;In America and many other countries that brew beer, Reinheitsgebot doesn't deter breweries from making what they think will be a great beer. Some beers that are widely enjoyed but are never Reinhetsgebot are: various fruit beers, Winter ales that include a common ingredient of spruce tips, any beer including a spice, or any beer that includes whiskey (Stouts or Porters). &#10;&#10;In defense of Reinheitsgebot, it is why German brewers tend to have the reputation of being the best. The reasoning behind it is that they can make incredible beers without the use of adjuncts or special ingredients. Brewing a beer is easy, but mastering it is near impossible. " wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+   <effect>
+      <InnerShadow />
+   </effect>
+</AnchorPane>

@@ -35,7 +35,9 @@ Req #12. - Custom Exception
 	- If C02 level is too high, throw 'Bottle Bomb' Exception
 	
 	
-	
+Bottle bomb upper-limit: 3.4 CO2 volumes
+
+-Beer Table, BeerIngredient Table, Ingredient Table
 		
 	
 	

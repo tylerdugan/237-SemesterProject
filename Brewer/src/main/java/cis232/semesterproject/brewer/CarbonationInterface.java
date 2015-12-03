@@ -2,8 +2,11 @@ package cis232.semesterproject.brewer;
 
 public interface CarbonationInterface {
 	
-	//Methods for returning carbonation levels to GUI using
-	//different sugar types.
+	/*
+	 * Methods to return carbonation levels
+	 * for both kinds of sugar
+	 */
+	
 	public int CornSugarCarbonation();
 	public int TableSugarCarbonation();
 }

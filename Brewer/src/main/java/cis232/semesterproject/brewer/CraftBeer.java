@@ -4,6 +4,7 @@ public class CraftBeer {
 	/**
 	 * Craft beers have 3 main ingredients and any number
 	 * of special ingredients, retrieved from GUI text field.
+	 * All special ingredients stored as a single long string.
 	 */
 	
 	int id;			//Beer ID
