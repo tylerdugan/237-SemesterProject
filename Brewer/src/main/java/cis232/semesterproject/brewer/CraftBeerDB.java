@@ -32,7 +32,7 @@ public class CraftBeerDB {
 			
 			//Create table string
 			String createBeersTable = "create table CraftBeers(" +
-								"beerid int" +
+								"beerid int, " +
 								"id int not null primary key, " + 
 								"special varchar(500) " +
 								")";
@@ -51,7 +51,7 @@ public class CraftBeerDB {
 			 */
 		}
 		
-		public static void addBeer(Connection conn, int beerid, int id, String special){
+		public static void addCraftBeer(Connection conn, int beerid, int id, String special){
 			Statement stmt = null;
 			try{
 				stmt = conn.createStatement();

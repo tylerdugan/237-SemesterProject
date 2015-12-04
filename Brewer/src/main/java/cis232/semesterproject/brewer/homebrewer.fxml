@@ -100,7 +100,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="ComboBoxName" layoutY="38.0" prefWidth="150.0" />
+                        <ComboBox fx:id="ComboBoxName" layoutY="38.0" onAction="#MatchRecipeValues" prefWidth="150.0" />
                         <ComboBox fx:id="ComboBoxGrains" layoutX="167.0" layoutY="38.0" prefWidth="150.0" />
                         <ComboBox fx:id="ComboBoxHops" layoutX="325.0" layoutY="38.0" prefWidth="150.0" />
                         <ComboBox fx:id="ComboBoxYeast" layoutX="491.0" layoutY="38.0" prefWidth="150.0" />

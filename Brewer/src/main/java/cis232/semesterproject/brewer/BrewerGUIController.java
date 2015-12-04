@@ -1,5 +1,14 @@
 package cis232.semesterproject.brewer;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 /*
  * Controller Class for Home Brewer GUI
  */
@@ -17,7 +26,7 @@ public class BrewerGUIController {
     private Label LabelWarn;
 
     @FXML
-    private ComboBox<?> ComboBoxHops;
+    private ComboBox<String> ComboBoxHops;
 
     @FXML
     private TextField TextBoxCo2;
@@ -29,19 +38,19 @@ public class BrewerGUIController {
     private Button ButtonSubmit;
 
     @FXML
-    private ComboBox<?> ComboBoxGrains;
+    private ComboBox<String> ComboBoxGrains;
 
     @FXML
-    private ChoiceBox<?> ChoiceBoxStyle;
+    private ChoiceBox<String> ChoiceBoxStyle;
 
     @FXML
     private TextField TextBoxTarget;
 
     @FXML
-    private ComboBox<?> ComboBoxYeast;
+    private ComboBox<String> ComboBoxYeast;
 
     @FXML
-    private ComboBox<?> ComboBoxName;
+    private ComboBox<String> ComboBoxName;
 
     @FXML
     private Label LabelReinYes;
@@ -57,4 +66,88 @@ public class BrewerGUIController {
 
     @FXML
     private TextArea TextAreaSpecial;
+    
+    @FXML
+    private void initialize(){
+    	LoadRecipeBook();
+    }
+    
+    //Array Lists for each ingredient
+	ObservableList<String> name = FXCollections.observableArrayList();
+	ObservableList<String> grains = FXCollections.observableArrayList();
+	ObservableList<String> yeast = FXCollections.observableArrayList();
+	ObservableList<String> hops = FXCollections.observableArrayList();
+    
+    @FXML
+    private void LoadRecipeBook(){
+    	Connection conn = null;
+    	Statement stmt = null;
+    	
+    	//Connect to database and create statement
+    	try{
+			conn = DriverManager.getConnection("jdbc:derby:db/Beers; create=true");
+			System.out.println("Connection Initialized");
+			stmt = conn.createStatement();
+		}catch(SQLException e){
+			System.out.printf("DB Error %s: ", e.getMessage());
+			e.printStackTrace();
+		}
+    	
+    	//Load Recipe Book values from PureBeers table
+    	try{
+    		ResultSet ingredients = stmt.executeQuery("select name, grains, yeast, hops from PureBeers");
+    		
+    		
+    		
+    		//Load database values to Observable List
+    		while(ingredients.next()){
+    			name.add(ingredients.getString("name"));
+    			grains.add(ingredients.getString("grains"));
+    			yeast.add(ingredients.getString("yeast"));
+    			hops.add(ingredients.getString("hops"));
+    		}
+    		
+    		//Load lists to GUI
+    		ComboBoxName.setItems(name);
+    		ComboBoxGrains.setItems(grains);
+    		ComboBoxYeast.setItems(yeast);
+    		ComboBoxHops.setItems(hops);
+    		
+    	}catch(SQLException e){
+    		e.getMessage();
+    	}
+    }
+    
+    
+    /*
+     * Matches recipe book ingredients based off of 
+     * Beer name selected
+     */
+    @FXML
+    public void MatchRecipeValues(){
+    	Connection conn = null;
+    	Statement stmt = null;
+    	
+    	//Connect to database and create statement
+    	try{
+			conn = DriverManager.getConnection("jdbc:derby:db/Beers; create=true");
+			System.out.println("Connection Initialized");
+			stmt = conn.createStatement();
+		}catch(SQLException e){
+			System.out.printf("DB Error %s: ", e.getMessage());
+			e.printStackTrace();
+		}
+    	
+    	//Select beers from database
+    	try{
+    		ResultSet ingredients = stmt.executeQuery("select grains, yeast, hops from PureBeers where name='" + ComboBoxName.getValue() + "'");
+    		if(ingredients.next()){
+	    		ComboBoxYeast.setValue(ingredients.getString("yeast"));
+	    		ComboBoxGrains.setValue(ingredients.getString("grains"));
+	    		ComboBoxHops.setValue(ingredients.getString("hops"));	
+    		}
+    	}catch(SQLException e){
+    		e.getMessage();
+    	}
+    }
 }
