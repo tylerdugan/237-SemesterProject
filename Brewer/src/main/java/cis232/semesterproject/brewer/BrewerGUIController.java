@@ -154,9 +154,11 @@ public class BrewerGUIController {
     //Toggle Purity label based on Special Ingredients box
     @FXML
     public void CheckPurity(){
-    	if(TextAreaSpecial.getText() == ""){
-    		LabelReinYes.setVisible(true);
-    		LabelReinNo.setVisible(false);
+    	if(TextAreaSpecial.getText().equals("")){
+    		if(ComboBoxName.getValue() != null){
+	    		LabelReinYes.setVisible(true);
+	    		LabelReinNo.setVisible(false);
+    		}
     	} else{
     		LabelReinYes.setVisible(false);
     		LabelReinNo.setVisible(true);
