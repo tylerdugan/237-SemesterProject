@@ -104,14 +104,14 @@
                         <ComboBox fx:id="ComboBoxGrains" layoutX="167.0" layoutY="38.0" prefWidth="150.0" />
                         <ComboBox fx:id="ComboBoxHops" layoutX="325.0" layoutY="38.0" prefWidth="150.0" />
                         <ComboBox fx:id="ComboBoxYeast" layoutX="491.0" layoutY="38.0" prefWidth="150.0" />
-                        <TextArea fx:id="TextAreaSpecial" layoutX="480.0" layoutY="147.0" prefHeight="163.0" prefWidth="173.0" promptText="(example) &#10;Coffee - 10oz &#10;Crystal Malt - 1Lb            &#10;Bitter Orange Peel - 4oz" wrapText="true" />
-                        <Button fx:id="ButtonRein" layoutX="97.0" layoutY="150.0" mnemonicParsing="false" text="Is Reinheitsgebot?" />
-                        <Label fx:id="LabelReinYes" layoutX="37.0" layoutY="199.0" text="This is Reinhetsgebot!" textFill="#36942b" underline="true">
+                        <TextArea fx:id="TextAreaSpecial" layoutX="480.0" layoutY="147.0" prefHeight="163.0" prefWidth="173.0" promptText="(example) Coffee - 10oz Crystal Malt - 1Lb            Bitter Orange Peel - 4oz" wrapText="true" />
+                        <Button fx:id="ButtonRein" layoutX="97.0" layoutY="150.0" mnemonicParsing="false" onAction="#CheckPurity" text="Is Reinheitsgebot?" />
+                        <Label fx:id="LabelReinYes" layoutX="37.0" layoutY="199.0" text="This is Reinhetsgebot!" textFill="#36942b" underline="true" visible="false">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="LabelReinNo" layoutX="37.0" layoutY="253.0" text="This is not Reinhetsgebot!" textFill="RED" underline="true">
+                        <Label fx:id="LabelReinNo" layoutX="37.0" layoutY="253.0" text="This is not Reinhetsgebot!" textFill="RED" underline="true" visible="false">
                            <font>
                               <Font size="24.0" />
                            </font>

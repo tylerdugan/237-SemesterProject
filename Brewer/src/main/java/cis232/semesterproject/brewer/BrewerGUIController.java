@@ -150,4 +150,17 @@ public class BrewerGUIController {
     		e.getMessage();
     	}
     }
+    
+    //Toggle Purity label based on Special Ingredients box
+    @FXML
+    public void CheckPurity(){
+    	if(TextAreaSpecial.getText() == ""){
+    		LabelReinYes.setVisible(true);
+    		LabelReinNo.setVisible(false);
+    	} else{
+    		LabelReinYes.setVisible(false);
+    		LabelReinNo.setVisible(true);
+    	}
+
+    }
 }
