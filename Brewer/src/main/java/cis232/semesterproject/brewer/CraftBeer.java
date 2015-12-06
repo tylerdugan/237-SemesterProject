@@ -14,6 +14,14 @@ public class CraftBeer {
 	String hops;	//Hops Name
 	String special; //Special ingredient names/amounts are store in one long string
 	
+	public CraftBeer(String n, String g, String y, String h, String spec){
+		this.name = n;
+		this.grains = g;
+		this.yeast = y;
+		this.hops = h;
+		this.special = spec;
+	}
+	
 	public int getId() {
 		return id;
 	}

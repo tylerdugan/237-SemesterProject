@@ -14,7 +14,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent parent = FXMLLoader.load(getClass().getResource("homebrewer.fxml"));
+		Parent parent = FXMLLoader.load(getClass().getResource("homebrewerGIF.fxml"));
 		Scene scene = new Scene(parent);
 		
 		primaryStage.setScene(scene);

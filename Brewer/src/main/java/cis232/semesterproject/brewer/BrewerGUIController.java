@@ -2,6 +2,7 @@ package cis232.semesterproject.brewer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,51 +23,64 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class BrewerGUIController {
-	@FXML
-    private Label LabelWarn;
+	
+	 @FXML
+	    private Label LabelWarn;
 
-    @FXML
-    private ComboBox<String> ComboBoxHops;
+	    @FXML
+	    private ComboBox<String> ComboBoxHops;
 
-    @FXML
-    private TextField TextBoxCo2;
+	    @FXML
+	    private TextField TextBoxCo2;
 
-    @FXML
-    private Button ButtonRein;
+	    @FXML
+	    private Button ButtonRein;
 
-    @FXML
-    private Button ButtonSubmit;
+	    @FXML
+	    private Button ButtonSubmit;
 
-    @FXML
-    private ComboBox<String> ComboBoxGrains;
+	    @FXML
+	    private ComboBox<String> ComboBoxGrains;
 
-    @FXML
-    private ChoiceBox<String> ChoiceBoxStyle;
+	    @FXML
+	    private ChoiceBox<String> ChoiceBoxStyle;
 
-    @FXML
-    private TextField TextBoxTarget;
+	    @FXML
+	    private TextField TextBoxTarget;
 
-    @FXML
-    private ComboBox<String> ComboBoxYeast;
+	    @FXML
+	    private Button ButtonDelete;
 
-    @FXML
-    private ComboBox<String> ComboBoxName;
+	    @FXML
+	    private Button ButtonUpdate;
 
-    @FXML
-    private Label LabelReinYes;
+	    @FXML
+	    private Button ButtonAdd;
 
-    @FXML
-    private TextField TextBoxGallons;
+	    @FXML
+	    private ComboBox<String> ComboBoxYeast;
 
-    @FXML
-    private TextField TextBoxSugar;
+	    @FXML
+	    private ComboBox<String> ComboBoxName;
 
-    @FXML
-    private Label LabelReinNo;
+	    @FXML
+	    private Label LabelReinYes;
 
-    @FXML
-    private TextArea TextAreaSpecial;
-    
+	    @FXML
+	    private TextField TextBoxGallons;
+
+	    @FXML
+	    private TextField TextBoxSugar;
+
+	    @FXML
+	    private Label LabelReinNo;
+
+	    @FXML
+	    private TextArea TextAreaSpecial;
+	    
+	    @FXML
+	    private TextField TextFieldCustomName;
+	    
     @FXML
     private void initialize(){
     	LoadRecipeBook();
@@ -78,6 +92,18 @@ public class BrewerGUIController {
 	ObservableList<String> yeast = FXCollections.observableArrayList();
 	ObservableList<String> hops = FXCollections.observableArrayList();
     
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     @FXML
     private void LoadRecipeBook(){
     	Connection conn = null;
@@ -99,7 +125,23 @@ public class BrewerGUIController {
     		
     		
     		
-    		//Load database values to Observable List
+    		//Load PureBeer values to Observable List
+    		while(ingredients.next()){
+    			name.add(ingredients.getString("name"));
+    			grains.add(ingredients.getString("grains"));
+    			yeast.add(ingredients.getString("yeast"));
+    			hops.add(ingredients.getString("hops"));
+    		}
+    		
+    		//Load lists to GUI
+    		ComboBoxName.setItems(name);
+    		ComboBoxGrains.setItems(grains);
+    		ComboBoxYeast.setItems(yeast);
+    		ComboBoxHops.setItems(hops);
+    		
+    		ingredients = stmt.executeQuery("select name, grains, yeast, hops, Special from CraftBeers");
+    		
+    		//Load CraftBeers values to Observable List
     		while(ingredients.next()){
     			name.add(ingredients.getString("name"));
     			grains.add(ingredients.getString("grains"));
@@ -119,6 +161,14 @@ public class BrewerGUIController {
     }
     
     
+    
+    
+    
+    
+    
+    
+    
+    
     /*
      * Matches recipe book ingredients based off of 
      * Beer name selected
@@ -131,7 +181,6 @@ public class BrewerGUIController {
     	//Connect to database and create statement
     	try{
 			conn = DriverManager.getConnection("jdbc:derby:db/Beers; create=true");
-			System.out.println("Connection Initialized");
 			stmt = conn.createStatement();
 		}catch(SQLException e){
 			System.out.printf("DB Error %s: ", e.getMessage());
@@ -140,16 +189,35 @@ public class BrewerGUIController {
     	
     	//Select beers from database
     	try{
-    		ResultSet ingredients = stmt.executeQuery("select grains, yeast, hops from PureBeers where name='" + ComboBoxName.getValue() + "'");
-    		if(ingredients.next()){
-	    		ComboBoxYeast.setValue(ingredients.getString("yeast"));
-	    		ComboBoxGrains.setValue(ingredients.getString("grains"));
-	    		ComboBoxHops.setValue(ingredients.getString("hops"));	
-    		}
+    			//Matches values for Pure Beers
+	    		ResultSet ingredients = stmt.executeQuery("select grains, yeast, hops from PureBeers where name='" + ComboBoxName.getValue() + "'");
+	    		if(ingredients.next()){
+		    		ComboBoxYeast.setValue(ingredients.getString("yeast"));
+		    		ComboBoxGrains.setValue(ingredients.getString("grains"));
+		    		ComboBoxHops.setValue(ingredients.getString("hops"));
+		    		TextAreaSpecial.setText("");
+	    		}
+	    		
+	    		//Matches values for Craft Beers
+	    		ingredients = stmt.executeQuery("select grains, yeast, hops, Special from CraftBeers where name='" + ComboBoxName.getValue() + "'");
+	    		if(ingredients.next()){
+		    		ComboBoxYeast.setValue(ingredients.getString("yeast"));
+		    		ComboBoxGrains.setValue(ingredients.getString("grains"));
+		    		ComboBoxHops.setValue(ingredients.getString("hops"));
+		    		TextAreaSpecial.setText(ingredients.getString("Special"));
+	    		}
+	    		
     	}catch(SQLException e){
     		e.getMessage();
     	}
     }
+    
+    
+    
+    
+    
+    
+    
     
     //Toggle Purity label based on Special Ingredients box
     @FXML
@@ -164,5 +232,175 @@ public class BrewerGUIController {
     		LabelReinNo.setVisible(true);
     	}
 
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //Delete a recipe from book
+    @FXML
+    public void DeleteRecipe(){
+    	Connection conn = null;
+    	Statement stmt = null;
+    	
+    	//Connect to database and create statement
+    	try{
+			conn = DriverManager.getConnection("jdbc:derby:db/Beers; create=true");
+			stmt = conn.createStatement();
+		}catch(SQLException e){
+			System.out.printf("DB Error %s: ", e.getMessage());
+			e.printStackTrace();
+		}
+    	
+    	//If Pure Beer, Delete from Pure Beers Table
+    	if(TextAreaSpecial.getText().equals("")){
+	    	try {
+				stmt.executeUpdate("DELETE from PureBeers WHERE name='" + ComboBoxName.getValue() + "'");
+				System.out.println("Recipe Deleted");
+				ClearObservableLists();
+				LoadRecipeBook();
+				System.out.println("Recipe book re-loaded.");
+			} catch (SQLException e) {
+				e.getMessage();
+			}
+    	}
+    	
+    	//If Craft Beer, Delete from Craft Beers Table
+    	if(!TextAreaSpecial.getText().equals("")){
+	    	try {
+				stmt.executeUpdate("DELETE from CraftBeers WHERE name='" + ComboBoxName.getValue() + "'");
+				System.out.println("Recipe Deleted");
+				ClearObservableLists();
+				LoadRecipeBook();
+				System.out.println("Recipe book re-loaded.");
+			} catch (SQLException e) {
+				e.getMessage();
+			}
+    	}
+    }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //Add Custom Beer to Recipe Book
+    //Update Custom Recpies
+    /*
+     * You can't update the 5 pre-set recipes with current build
+     */
+    @FXML
+    public void AddRecipe(){
+    	Connection conn = null;
+    	Statement stmt = null;
+    	
+    	//Connect to database and create statement
+    	try{
+			conn = DriverManager.getConnection("jdbc:derby:db/Beers; create=true");
+			stmt = conn.createStatement();
+		}catch(SQLException e){
+			System.out.printf("DB Error %s: ", e.getMessage());
+			e.printStackTrace();
+		}
+    	
+    	//If special ingredient field is empty, add to PureBeerDB
+    	if(TextAreaSpecial.getText().equals("")){
+    		try {
+				//Cast as pure beer
+				PureBeer PureCustom = new PureBeer(TextFieldCustomName.getText(), ComboBoxGrains.getValue(), ComboBoxHops.getValue(), ComboBoxYeast.getValue());
+				ClearObservableLists();
+				
+				//Add to PureBeerDB
+				PureBeerDB.addPureBeer(conn, PureCustom.getName(), PureCustom.getGrains(), PureCustom.getYeast(), PureCustom.getHops());
+				System.out.println("Recipe Added");			
+				LoadRecipeBook();
+				
+				//Clear Text field and move name to drop down
+				TextFieldCustomName.setText("");
+				ComboBoxName.setValue(PureCustom.getName());
+
+				System.out.println("Recipe book re-loaded.");
+			} catch (Exception e) {
+				e.getMessage();
+			}
+    	} else if(!TextAreaSpecial.getText().equals("")){
+    		//Cast as Craft Beer
+    		CraftBeer CraftCustom = new CraftBeer(TextFieldCustomName.getText(), ComboBoxGrains.getValue(), 
+    											ComboBoxHops.getValue(), ComboBoxYeast.getValue(), TextAreaSpecial.getText());
+    		ClearObservableLists();
+    		
+    		//Add to CraftBeerDB
+    		CraftBeerDB.addCraftBeer(conn, CraftCustom.getName(), CraftCustom.getGrains(), CraftCustom.getYeast(), CraftCustom.getHops(), CraftCustom.getSpecial());
+    		System.out.println("Recipe Added");			
+			LoadRecipeBook();
+			
+    		//Clear Text field and move name to drop down
+			TextFieldCustomName.setText("");
+			ComboBoxName.setValue(CraftCustom.getName());
+
+			System.out.println("Recipe book re-loaded.");
+    	}
+    }
+    
+    
+    
+    
+    
+    //Update Recipe Book
+    @FXML
+    public void UpdateRecipe(){
+    	Connection conn = null;
+    	Statement stmt = null;
+    	
+    	//Connect to database and create statement
+    	try{
+			conn = DriverManager.getConnection("jdbc:derby:db/Beers; create=true");
+			stmt = conn.createStatement();
+		}catch(SQLException e){
+			System.out.printf("DB Error %s: ", e.getMessage());
+			e.printStackTrace();
+		}
+    	
+    	
+    	//Update Pure recipe
+    	if(TextAreaSpecial.getText().equals("")){
+    		try {
+				stmt.executeQuery(String.format("UPDATE PureBeers SET grains='%s', hops='%s', yeast='%s' WHERE name='" + ComboBoxName.getValue() + "'", ComboBoxGrains.getValue(),
+						ComboBoxHops.getValue(), ComboBoxYeast.getValue()));
+				System.out.println("Recipe Updated.");
+			} catch (SQLException e) {
+				e.getMessage();
+			}
+    	} 
+    	
+    	//Update Craft Recipe
+    	else if(!TextAreaSpecial.getText().equals("")){
+    		
+    	}
+    }
+    
+    
+    
+    
+    
+    
+    //Helper method when updating recipe book
+    @FXML
+    public void ClearObservableLists(){
+    	name.clear();
+    	grains.clear();
+    	yeast.clear();
+    	hops.clear();
     }
 }

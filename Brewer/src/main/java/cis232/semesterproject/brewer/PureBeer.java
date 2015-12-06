@@ -11,6 +11,14 @@ public class PureBeer {
 	String yeast;	//Yeast Name
 	String hops;	//Hops Name
 	
+	//Constructor used for adding reciped
+	public PureBeer(String n, String g, String y, String h){
+		this.name = n;
+		this.grains = g;
+		this.yeast = y;
+		this.hops = h;
+	}
+	
 	public int getId() {
 		return id;
 	}

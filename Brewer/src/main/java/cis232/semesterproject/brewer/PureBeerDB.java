@@ -56,6 +56,7 @@ public class PureBeerDB{
 		addPureBeer(conn, "PaleAle", "Pilsen", "WLP566", "Cascade");
 		addPureBeer(conn, "BarleyWine", "Crystal", "Wyeast1084", "Columbus");
 		addPureBeer(conn, "Stout", "Wheat", "Wyeast1764", "Calypso");
+		addPureBeer(conn, "Test_Name", "Test_Grain", "Test_Yeast", "Test_Hops");
 	}
 	
 	public static void addPureBeer(Connection conn, String name, String grains, String yeast, String hops){
