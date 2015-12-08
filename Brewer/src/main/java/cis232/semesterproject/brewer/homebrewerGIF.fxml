@@ -45,7 +45,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="219.0" layoutY="1.0" text="Gallons of Beer">
+                                    <Label layoutX="219.0" layoutY="1.0" text="Liters of Beer">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -63,8 +63,8 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="TextBoxCo2" layoutX="532.0" layoutY="26.0" prefHeight="29.0" prefWidth="119.0" />
-                                    <Button fx:id="ButtonSubmit" layoutX="331.0" layoutY="102.0" mnemonicParsing="false" text="Check" />
-                                    <Label fx:id="LabelWarn" layoutX="170.0" layoutY="152.0" text="Caution! This bottle may explode!" textFill="RED">
+                                    <Button fx:id="ButtonSubmit" layoutX="331.0" layoutY="102.0" mnemonicParsing="false" onAction="#CalculateC02" text="Check" />
+                                    <Label fx:id="LabelWarn" layoutX="170.0" layoutY="152.0" text="Caution! This bottle may explode!" textFill="RED" visible="false">
                                        <font>
                                           <Font size="25.0" />
                                        </font>
@@ -75,7 +75,7 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="TextBoxTarget" editable="false" layoutX="36.0" layoutY="115.0" prefHeight="25.0" prefWidth="78.0" />
-                                    <ComboBox fx:id="ComboBoxStyle" layoutX="23.0" layoutY="28.0" prefWidth="150.0" />
+                                    <ComboBox fx:id="ComboBoxStyle" layoutX="23.0" layoutY="28.0" onAction="#MatchStyleC02" prefWidth="150.0" />
                                  </children>
                               </AnchorPane>
                            </children>

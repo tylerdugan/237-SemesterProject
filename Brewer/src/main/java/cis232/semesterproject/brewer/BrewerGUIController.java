@@ -2,10 +2,10 @@ package cis232.semesterproject.brewer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +16,6 @@ import javafx.collections.ObservableList;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -84,6 +83,7 @@ public class BrewerGUIController {
     @FXML
     private void initialize(){
     	LoadRecipeBook();
+    	LoadStyles();
     }
     
     //Array Lists for each ingredient
@@ -92,17 +92,9 @@ public class BrewerGUIController {
 	ObservableList<String> yeast = FXCollections.observableArrayList();
 	ObservableList<String> hops = FXCollections.observableArrayList();
     
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//Lists for Bottle Bomb Page
+	ObservableList<String> styles = FXCollections.observableArrayList();
+	ObservableList<Double> carb = FXCollections.observableArrayList();
 	
     @FXML
     private void LoadRecipeBook(){
@@ -159,6 +151,68 @@ public class BrewerGUIController {
     		e.getMessage();
     	}
     }
+    
+    @FXML
+    public void LoadStyles(){
+    	Connection conn = null;
+    	Statement stmt = null;
+    	
+    	//Connect to database and create statement
+    	try{
+			conn = DriverManager.getConnection("jdbc:derby:db/Beers; create=true");
+			stmt = conn.createStatement();
+		}catch(SQLException e){
+			System.out.printf("DB Error %s: ", e.getMessage());
+			e.printStackTrace();
+		}
+    	
+    	styles.add("Amber Ale");
+    	styles.add("Brown Ale");
+    	styles.add("Barley Wine");
+    	styles.add("Pale Ale");
+    	styles.add("Wheat Beer");
+    	styles.add("Blonde Ale");
+    	styles.add("India Pale Ale");
+    	styles.add("Oktober Fest");
+    	styles.add("Saison");
+    	styles.add("Double IPA");
+    	
+    	carb.add(2.3);
+    	carb.add(2.4);
+    	carb.add(2.1);
+    	carb.add(2.4);
+    	carb.add(2.6);
+    	carb.add(2.9);
+    	carb.add(2.4);
+    	carb.add(2.5);
+    	carb.add(2.2);
+    	carb.add(2.2);
+    	ComboBoxStyle.setItems(styles);
+    }
+    
+    @FXML
+    public void MatchStyleC02(){
+    	int index = styles.indexOf(ComboBoxStyle.getValue());
+    	TextBoxTarget.setText(carb.get(index).toString());
+    }
+    
+    @FXML
+    public void CalculateC02(){
+    	Double C02lvl = .455 * Double.parseDouble(TextBoxSugar.getText()) 
+    					/ Double.parseDouble(TextBoxGallons.getText());
+    	
+    	TextBoxCo2.setText(C02lvl.toString());
+    	
+    	if(C02lvl > 3.5){
+    		LabelWarn.setVisible(true);
+    	}else{
+    		LabelWarn.setVisible(false);
+    	}
+    }
+    
+    
+    
+    
     
     
     
