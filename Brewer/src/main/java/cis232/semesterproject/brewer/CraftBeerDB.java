@@ -53,7 +53,7 @@ public class CraftBeerDB {
 			/**
 			 * Add Craft Beers Below
 			 */
-			addCraftBeer(conn,"Fire","Why","Da","Fuq","Not");
+			addCraftBeer(conn,"I dont even know","Stuff","More Stuff","Something normal","A bunch of random ingredients");
 		}
 		
 		public static void addCraftBeer(Connection conn, String name, String grains, String yeast, String hops, String Special){

@@ -318,7 +318,7 @@ public class BrewerGUIController {
     	if(TextAreaSpecial.getText().equals("")){
     		try {
 				//Cast as pure beer
-				PureBeer PureCustom = new PureBeer(TextFieldCustomName.getText(), ComboBoxGrains.getValue(), ComboBoxHops.getValue(), ComboBoxYeast.getValue());
+				PureBeer PureCustom = new PureBeer(TextFieldCustomName.getText(), ComboBoxGrains.getValue(), ComboBoxYeast.getValue(), ComboBoxHops.getValue());
 				ClearObservableLists();
 				
 				//Add to PureBeerDB
@@ -337,7 +337,7 @@ public class BrewerGUIController {
     	} else if(!TextAreaSpecial.getText().equals("")){
     		//Cast as Craft Beer
     		CraftBeer CraftCustom = new CraftBeer(TextFieldCustomName.getText(), ComboBoxGrains.getValue(), 
-    											ComboBoxHops.getValue(), ComboBoxYeast.getValue(), TextAreaSpecial.getText());
+    											 ComboBoxYeast.getValue(), ComboBoxHops.getValue(), TextAreaSpecial.getText());
     		ClearObservableLists();
     		
     		//Add to CraftBeerDB
