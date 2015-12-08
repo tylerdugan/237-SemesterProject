@@ -43,7 +43,7 @@ public class BrewerGUIController {
 	    private ComboBox<String> ComboBoxGrains;
 
 	    @FXML
-	    private ChoiceBox<String> ChoiceBoxStyle;
+	    private ComboBox<String> ComboBoxStyle;
 
 	    @FXML
 	    private TextField TextBoxTarget;

@@ -45,7 +45,6 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <ChoiceBox fx:id="ChoiceBoxStyle" layoutX="21.0" layoutY="28.0" prefWidth="150.0" />
                                     <Label layoutX="219.0" layoutY="1.0" text="Gallons of Beer">
                                        <font>
                                           <Font size="18.0" />
@@ -76,6 +75,7 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="TextBoxTarget" editable="false" layoutX="36.0" layoutY="115.0" prefHeight="25.0" prefWidth="78.0" />
+                                    <ComboBox fx:id="ComboBoxStyle" layoutX="23.0" layoutY="28.0" prefWidth="150.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -116,7 +116,7 @@
                               <ComboBox fx:id="ComboBoxHops" layoutX="325.0" layoutY="38.0" prefWidth="150.0" />
                               <ComboBox fx:id="ComboBoxYeast" layoutX="491.0" layoutY="38.0" prefWidth="150.0" />
                               <TextArea fx:id="TextAreaSpecial" layoutX="480.0" layoutY="147.0" prefHeight="163.0" prefWidth="173.0" promptText="(example) &#10;Coffee - 10oz &#10;Crystal Malt - 1Lb            &#10;Bitter Orange Peel - 4oz" wrapText="true" />
-                              <Button fx:id="ButtonRein" layoutX="97.0" layoutY="150.0" mnemonicParsing="false" onAction="#CheckPurity" text="Is Reinheitsgebot?" />
+                              <Button fx:id="ButtonRein" layoutX="59.0" layoutY="147.0" mnemonicParsing="false" onAction="#CheckPurity" text="Is Reinheitsgebot?" />
                               <Label fx:id="LabelReinYes" layoutX="37.0" layoutY="199.0" text="This is Reinhetsgebot!" textFill="#36942b" underline="true" visible="false">
                                  <font>
                                     <Font size="24.0" />
@@ -130,12 +130,12 @@
                               <Button fx:id="ButtonAdd" layoutX="37.0" layoutY="95.0" mnemonicParsing="false" onAction="#AddRecipe" text="Add" />
                               <Button fx:id="ButtonUpdate" layoutX="83.0" layoutY="95.0" mnemonicParsing="false" onAction="#UpdateRecipe" text="Update" />
                               <Button fx:id="ButtonDelete" layoutX="149.0" layoutY="95.0" mnemonicParsing="false" onAction="#DeleteRecipe" text="Delete" />
-                              <Text layoutX="242.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Custom Beer Name:" wrappingWidth="206.13671875">
+                              <Text layoutX="268.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Custom Beer Name:" wrappingWidth="206.13671875">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Text>
-                              <TextField fx:id="TextFieldCustomName" layoutX="243.0" layoutY="121.0" />
+                              <TextField fx:id="TextFieldCustomName" layoutX="272.0" layoutY="118.0" />
                            </children>
                         </AnchorPane>
                      </content>
