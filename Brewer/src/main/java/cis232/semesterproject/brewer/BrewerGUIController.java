@@ -296,10 +296,6 @@ public class BrewerGUIController {
     
     
     //Add Custom Beer to Recipe Book
-    //Update Custom Recpies
-    /*
-     * You can't update the 5 pre-set recipes with current build
-     */
     @FXML
     public void AddRecipe(){
     	Connection conn = null;
@@ -376,9 +372,15 @@ public class BrewerGUIController {
     	//Update Pure recipe
     	if(TextAreaSpecial.getText().equals("")){
     		try {
-				stmt.executeQuery(String.format("UPDATE PureBeers SET grains='%s', hops='%s', yeast='%s' WHERE name='" + ComboBoxName.getValue() + "'", ComboBoxGrains.getValue(),
-						ComboBoxHops.getValue(), ComboBoxYeast.getValue()));
+    			String tempName = ComboBoxName.getValue();
+    			String updateTable = String.format("UPDATE PureBeers SET grains='%s', hops='%s', yeast='%s' WHERE name='" + ComboBoxName.getValue() + "'", ComboBoxGrains.getValue(),
+						ComboBoxHops.getValue(), ComboBoxYeast.getValue());
+				stmt.executeUpdate(updateTable);
 				System.out.println("Recipe Updated.");
+				ClearObservableLists();
+				TextAreaSpecial.setText("");
+				LoadRecipeBook();
+				ComboBoxName.setValue(tempName);
 			} catch (SQLException e) {
 				e.getMessage();
 			}
@@ -386,7 +388,19 @@ public class BrewerGUIController {
     	
     	//Update Craft Recipe
     	else if(!TextAreaSpecial.getText().equals("")){
-    		
+			try {
+				String tempName = ComboBoxName.getValue();
+				String updateTable = String.format("UPDATE CraftBeers SET grains='%s', hops='%s', yeast='%s', special='%s' WHERE name='" + ComboBoxName.getValue() + "'", ComboBoxGrains.getValue(),
+						ComboBoxHops.getValue(), ComboBoxYeast.getValue(), TextAreaSpecial.getText());
+				stmt.executeUpdate(updateTable);
+				System.out.println("Recipe Updated.");
+				ClearObservableLists();
+				TextAreaSpecial.setText("");
+				LoadRecipeBook();
+				ComboBoxName.setValue(tempName);
+			} catch (SQLException e) {
+				e.getMessage();
+			}
     	}
     }
     
