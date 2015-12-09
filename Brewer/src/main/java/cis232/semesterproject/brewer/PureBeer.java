@@ -1,6 +1,8 @@
 package cis232.semesterproject.brewer;
 
-public class PureBeer {
+//REQ #4
+//REQ #6
+public class PureBeer implements BeerModel {
 	/**
 	 * Pure Beer only has 3 main ingredients
 	 */
@@ -11,7 +13,7 @@ public class PureBeer {
 	String yeast;	//Yeast Name
 	String hops;	//Hops Name
 	
-	//Constructor used for adding reciped
+	//Constructor used for adding recipe
 	public PureBeer(String n, String g, String y, String h){
 		this.name = n;
 		this.grains = g;
@@ -48,5 +50,27 @@ public class PureBeer {
 	}
 	public void setHops(String hops) {
 		this.hops = hops;
+	}
+
+
+	@Override
+	public double CornSugarCarbonation(Double v, Double s) {
+		Double carbLvl = .455 * v / s;
+		return carbLvl;
+	}
+
+	@Override
+	public double TableSugarCarbonation(Double v, Double s) {
+		Double carbLvl = .67 * v / s;
+		return carbLvl;
+	}
+
+	public String getType(String m) {
+		return m;
+	}
+
+	@Override
+	public String getSpecial() {
+		return null;
 	}
 }

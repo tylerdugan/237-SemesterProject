@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+//REQ #9
 public class BrewerGUIController {
 	
 	 @FXML
@@ -55,6 +55,9 @@ public class BrewerGUIController {
 
 	    @FXML
 	    private Button ButtonAdd;
+	    
+	    @FXML
+	    private Button ButtonAutoName;
 
 	    @FXML
 	    private ComboBox<String> ComboBoxYeast;
@@ -97,6 +100,7 @@ public class BrewerGUIController {
 	ObservableList<Double> carb = FXCollections.observableArrayList();
 	
     @FXML
+    //REQ #8
     private void LoadRecipeBook(){
     	Connection conn = null;
     	Statement stmt = null;
@@ -113,9 +117,7 @@ public class BrewerGUIController {
     	
     	//Load Recipe Book values from PureBeers table
     	try{
-    		ResultSet ingredients = stmt.executeQuery("select name, grains, yeast, hops from PureBeers");
-    		
-    		
+    		ResultSet ingredients = stmt.executeQuery("select name, grains,  yeast,  hops from PureBeers");
     		
     		//Load PureBeer values to Observable List
     		while(ingredients.next()){
@@ -136,10 +138,13 @@ public class BrewerGUIController {
     		//Load CraftBeers values to Observable List
     		while(ingredients.next()){
     			name.add(ingredients.getString("name"));
-    			grains.add(ingredients.getString("grains"));
-    			yeast.add(ingredients.getString("yeast"));
-    			hops.add(ingredients.getString("hops"));
+    			//grains.add(ingredients.getString("grains"));
+    			//yeast.add(ingredients.getString("yeast"));
+    			//hops.add(ingredients.getString("hops"));
     		}
+    		
+    		//Custom Ingredients that don't need a full database
+    		grains.add("Caramel");
     		
     		//Load lists to GUI
     		ComboBoxName.setItems(name);
@@ -166,6 +171,7 @@ public class BrewerGUIController {
 			e.printStackTrace();
 		}
     	
+    	//Build Style/Carbonation Lists
     	styles.add("Amber Ale");
     	styles.add("Brown Ale");
     	styles.add("Barley Wine");
@@ -189,25 +195,51 @@ public class BrewerGUIController {
     	carb.add(2.2);
     	ComboBoxStyle.setItems(styles);
     }
+   
     
+    
+    
+    
+    
+    
+    
+    
+    //Matches Suggested C02 level for beer style
     @FXML
     public void MatchStyleC02(){
     	int index = styles.indexOf(ComboBoxStyle.getValue());
     	TextBoxTarget.setText(carb.get(index).toString());
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    //Calculates C02 level based off of input
     @FXML
     public void CalculateC02(){
-    	Double C02lvl = .455 * Double.parseDouble(TextBoxSugar.getText()) 
-    					/ Double.parseDouble(TextBoxGallons.getText());
+    	try {
+			Double C02lvl = .455 * Double.parseDouble(TextBoxSugar.getText()) 
+							/ Double.parseDouble(TextBoxGallons.getText());
+			
+			TextBoxCo2.setText(C02lvl.toString());
+			
+			if(C02lvl > 3.5){
+				LabelWarn.setVisible(true);
+			}else{
+				LabelWarn.setVisible(false);
+			}
+		} 
+    	//REQ #11
+    	catch (NumberFormatException e) {
+			System.out.println("Invalud Input");
+		}
     	
-    	TextBoxCo2.setText(C02lvl.toString());
     	
-    	if(C02lvl > 3.5){
-    		LabelWarn.setVisible(true);
-    	}else{
-    		LabelWarn.setVisible(false);
-    	}
     }
     
     
@@ -218,16 +250,13 @@ public class BrewerGUIController {
     
     
     
-    
-    
-    
-    
-    
+     
     /*
      * Matches recipe book ingredients based off of 
      * Beer name selected
      */
     @FXML
+    //REQ #8
     public void MatchRecipeValues(){
     	Connection conn = null;
     	Statement stmt = null;
@@ -272,6 +301,8 @@ public class BrewerGUIController {
     
     
     
+  
+    
     
     //Toggle Purity label based on Special Ingredients box
     @FXML
@@ -290,7 +321,7 @@ public class BrewerGUIController {
 
     
     
-    
+  
     
     
     
@@ -322,7 +353,7 @@ public class BrewerGUIController {
 				System.out.println("Recipe book re-loaded.");
 			} catch (SQLException e) {
 				e.getMessage();
-			}
+			}	
     	}
     	
     	//If Craft Beer, Delete from Craft Beers Table
@@ -340,7 +371,6 @@ public class BrewerGUIController {
     }
     
 
-    
     
     
     
@@ -368,17 +398,17 @@ public class BrewerGUIController {
     	if(TextAreaSpecial.getText().equals("")){
     		try {
 				//Cast as pure beer
-				PureBeer PureCustom = new PureBeer(TextFieldCustomName.getText(), ComboBoxGrains.getValue(), ComboBoxYeast.getValue(), ComboBoxHops.getValue());
+    			BeerModel Beer = new PureBeer(TextFieldCustomName.getText(), ComboBoxGrains.getValue(), ComboBoxYeast.getValue(), ComboBoxHops.getValue());
 				ClearObservableLists();
 				
 				//Add to PureBeerDB
-				PureBeerDB.addPureBeer(conn, PureCustom.getName(), PureCustom.getGrains(), PureCustom.getYeast(), PureCustom.getHops());
-				System.out.println("Recipe Added");			
+				PureBeerDB.addPureBeer(conn, Beer.getName(), Beer.getGrains(), Beer.getYeast(), Beer.getHops());
+				System.out.println(BeerModel.getType("Pure Beer"));			
 				LoadRecipeBook();
 				
 				//Clear Text field and move name to drop down
 				TextFieldCustomName.setText("");
-				ComboBoxName.setValue(PureCustom.getName());
+				ComboBoxName.setValue(Beer.getName());
 
 				System.out.println("Recipe book re-loaded.");
 			} catch (Exception e) {
@@ -386,22 +416,27 @@ public class BrewerGUIController {
 			}
     	} else if(!TextAreaSpecial.getText().equals("")){
     		//Cast as Craft Beer
-    		CraftBeer CraftCustom = new CraftBeer(TextFieldCustomName.getText(), ComboBoxGrains.getValue(), 
+    		BeerModel Beer = new CraftBeer(TextFieldCustomName.getText(), ComboBoxGrains.getValue(), 
     											 ComboBoxYeast.getValue(), ComboBoxHops.getValue(), TextAreaSpecial.getText());
     		ClearObservableLists();
     		
     		//Add to CraftBeerDB
-    		CraftBeerDB.addCraftBeer(conn, CraftCustom.getName(), CraftCustom.getGrains(), CraftCustom.getYeast(), CraftCustom.getHops(), CraftCustom.getSpecial());
-    		System.out.println("Recipe Added");			
+    		CraftBeerDB.addCraftBeer(conn, Beer.getName(), Beer.getGrains(), Beer.getYeast(), Beer.getHops(), Beer.getSpecial());
+    		System.out.println(BeerModel.getType("Craft Beer"));			
 			LoadRecipeBook();
 			
     		//Clear Text field and move name to drop down
 			TextFieldCustomName.setText("");
-			ComboBoxName.setValue(CraftCustom.getName());
+			ComboBoxName.setValue(Beer.getName());
 
 			System.out.println("Recipe book re-loaded.");
     	}
     }
+    
+    
+    
+    
+  
     
     
     
@@ -457,6 +492,41 @@ public class BrewerGUIController {
 			}
     	}
     }
+    
+    
+    
+    
+    
+   
+    
+    
+    
+    //Auto Generates Name on click
+    //REQ #2
+    @FXML
+    public void AutoName() throws CustomExceptions{
+    	StringBuilder sb = new StringBuilder();
+    	//If no special ingredient entered
+    	if(TextAreaSpecial.getText().equals("")){
+    	sb.append(ComboBoxHops.getValue() + " Smash Ale");
+    	}else if(!TextAreaSpecial.getText().equals("")){
+    		
+    		//Weird occurrence if someone enters a special ingredient and than deletes it
+    		//without text box resetting.
+    		if(TextAreaSpecial.getText().equals(null)){
+    			throw new CustomExceptions("Special Ingredient area is null.");
+    		}
+    		
+    		String content = TextAreaSpecial.getText();
+    		content = content.concat(" ");
+    		String fWord = TextAreaSpecial.getText().substring(0, content.indexOf(" "));
+    		sb.append(fWord + " Craft Ale");
+    		
+    	}
+    	TextFieldCustomName.setText(sb.toString());
+    }
+    
+    
     
     
     

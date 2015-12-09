@@ -16,9 +16,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		Parent parent = FXMLLoader.load(getClass().getResource("homebrewerGIF.fxml"));
 		Scene scene = new Scene(parent);
-		
+
 		primaryStage.setScene(scene);
-		//primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 }

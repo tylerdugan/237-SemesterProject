@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//REQ #7
 public class CraftBeerDB {
 
 	public static void main(String[] args) {
@@ -53,7 +54,11 @@ public class CraftBeerDB {
 			/**
 			 * Add Craft Beers Below
 			 */
-			addCraftBeer(conn,"I dont even know","Stuff","More Stuff","Something normal","A bunch of random ingredients");
+			addCraftBeer(conn,"Barn Yard Ale","6-Row","Wyeast1056","Saaz","Apricot");
+			addCraftBeer(conn,"Fat Bottom Ale","2-Row","US-05","Fuggle","Coriander");
+			addCraftBeer(conn,"Hop Grenade","Pilsen","WLP566","Cascade","Vanilla Bean");
+			addCraftBeer(conn,"Skull Smash","Crystal","Wyeast1084","Columbus","Bourbon");
+			addCraftBeer(conn,"Special Handle Stout","Caramel","Wyeast1764","Calypso","Brown Sugar");
 		}
 		
 		public static void addCraftBeer(Connection conn, String name, String grains, String yeast, String hops, String Special){

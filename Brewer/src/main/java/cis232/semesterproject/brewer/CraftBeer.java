@@ -1,6 +1,8 @@
 package cis232.semesterproject.brewer;
 
-public class CraftBeer {
+//REQ #4
+//REQ #6
+public class CraftBeer implements BeerModel {
 	/**
 	 * Craft beers have 3 main ingredients and any number
 	 * of special ingredients, retrieved from GUI text field.
@@ -52,10 +54,27 @@ public class CraftBeer {
 	public void setHops(String hops) {
 		this.hops = hops;
 	}
+	
 	public void setSpecial(String special){
 		this.special = special;
 	}
 	public String getSpecial(){
 		return special;
+	}
+
+	@Override
+	public double CornSugarCarbonation(Double v, Double s) {
+		Double carbLvl = .455 * v / s;
+		return carbLvl;
+	}
+
+	@Override
+	public double TableSugarCarbonation(Double v, Double s) {
+		Double carbLvl = .67 * v / s;
+		return carbLvl;
+	}
+
+	public String getType(String m) {
+		return m;
 	}
 }
