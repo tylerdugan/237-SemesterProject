@@ -23,7 +23,11 @@ import javafx.scene.control.TextField;
 //REQ #9
 public class BrewerGUIController {
 	
-	 @FXML
+		//Used to re-initialize Databases
+		//Will erase custom recipes
+		private boolean LoadDB = true;
+	
+	 	@FXML
 	    private Label LabelWarn;
 
 	    @FXML
@@ -85,6 +89,10 @@ public class BrewerGUIController {
 	    
     @FXML
     private void initialize(){
+    	if(LoadDB){
+	    	PureBeerDB.main(null);
+	    	CraftBeerDB.main(null);
+    	}
     	LoadRecipeBook();
     	LoadStyles();
     }
